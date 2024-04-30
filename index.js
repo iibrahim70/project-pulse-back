@@ -27,7 +27,26 @@ app.get("/", (req, res) => {
   res.json(serverStatus);
 });
 
+// Authentication route
+app.post("/api/login", (req, res) => {
+  try {
+    const { userName, password } = req.body;
+
+    // Check if username and password are correct
+    if (userName === "admin" && password === "password") {
+      // Mock response for successful login
+      res.status(200).json({ success: true, message: "Login successful" });
+    } else {
+      // Mock response for unsuccessful login
+      res.status(401).json({ success: false, message: "Invalid credentials" });
+    }
+  } catch (error) {
+    // Error handling if something goes wrong
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+});
+
 // Start server
 app.listen(PORT, () => {
-  console.log(`Car Craze Is Running On Port ${PORT}`);
+  console.log(`Project Pulse Is Running On Port ${PORT}`);
 });
